@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Digital Zoo Manager</title>
+
+ <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, #d9f99d 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #a7f3d0 0%, transparent 35%),
+        linear-gradient(135deg, #ecfdf5, #f0fdf4, #eff6ff);
+      color: #17201a;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, #166534, #16a34a, #65a30d);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body > p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #52635a;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    #zoo {
+      width: min(700px, 100%);
+      border: 1px solid rgba(22, 101, 52, 0.18);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      margin: 25px auto;
+      padding: 22px;
+      box-shadow:
+        0 20px 50px rgba(22, 101, 52, 0.12),
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .zone {
+      position: relative;
+      border: 1px solid rgba(22, 163, 74, 0.2);
+      border-radius: 18px;
+      margin: 15px 0;
+      padding: 20px 22px;
+      background: rgba(240, 253, 244, 0.85);
+      text-align: left;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+      overflow: hidden;
+    }
+
+    .zone::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        #166534,
+        #22c55e,
+        #84cc16
+      );
+    }
+
+    .zone:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 15px 30px rgba(22, 101, 52, 0.14);
+      border-color: rgba(22, 163, 74, 0.45);
+    }
+
+    .zone h2 {
+      margin: 0 0 10px;
+      color: #166534;
+      font-size: 22px;
+    }
+
+    .zone p {
+      margin: 0;
+      color: #52635a;
+      font-size: 15px;
+    }
+
+    .animal {
+      display: inline-block;
+      margin-left: 5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: #fff7ed;
+      color: #ea580c;
+      font-weight: 800;
+      box-shadow: 0 3px 8px rgba(234, 88, 12, 0.12);
+    }
+
+    button {
+      border: none;
+      border-radius: 14px;
+      padding: 13px 30px;
+      margin: 5px 0 20px;
+      background: linear-gradient(135deg, #166534, #16a34a);
+      color: white;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(22, 101, 52, 0.22);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 28px rgba(22, 101, 52, 0.3);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    #output {
+      width: min(700px, 100%);
+      border: 1px solid rgba(22, 101, 52, 0.18);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      margin: 10px auto;
+      padding: 22px;
+      text-align: left;
+      line-height: 1.8;
+      color: #33443a;
+      box-shadow:
+        0 15px 35px rgba(22, 101, 52, 0.1);
+      animation: fadeIn 0.5s ease;
+    }
+
+    #output strong {
+      color: #166534;
+      font-size: 16px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 25px 12px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      body > p {
+        font-size: 14px;
+      }
+
+      #zoo,
+      #output {
+        padding: 16px;
+      }
+
+      .zone {
+        padding: 17px;
+      }
+
+      .zone h2 {
+        font-size: 19px;
+      }
+    }
+</style>
+</head>
+
+<body>
+
+  <h1>My Digital Zoo Manager</h1>
+
+  <p>
+    Use JavaScript and the DOM to explore animals, zones, parent nodes,
+    child nodes, and sibling nodes.
+  </p>
+
+  <div id="zoo">
+
+    <div class="zone" id="lionZone">
+      <h2>Lion Zone</h2>
+      <p>Animal: <span class="animal">Lion</span></p>
+    </div>
+
+    <div class="zone" id="elephantZone">
+      <h2>Elephant Zone</h2>
+      <p>Animal: <span class="animal">Elephant</span></p>
+    </div>
+
+    <div class="zone" id="pandaZone">
+      <h2>Panda Zone</h2>
+      <p>Animal: <span class="animal">Panda</span></p>
+    </div>
+
+  </div>
+
+  <button onclick="manageZoo()">Manage Zoo</button>
+
+  <div id="output">
+    Zoo information will appear here.
+  </div>
+
+  <script>
+    function manageZoo() {
+
+      // HTML DOM: Selecting elements from the webpage
+      let zoo = document.getElementById("zoo");
+      let lionZone = document.getElementById("lionZone");
+      let elephantZone = document.getElementById("elephantZone");
+      let pandaZone = document.getElementById("pandaZone");
+      let output = document.getElementById("output");
+
+      // The DOM Tree: zoo is the parent container of all animal zones
+      let parentNodeName = lionZone.parentNode.id;
+
+      // Parent, Child, and Sibling Nodes
+      let firstChildZone = zoo.children[0].id;
+      let secondChildZone = zoo.children[1].id;
+      let nextSiblingZone = lionZone.nextElementSibling.id;
+      let previousSiblingZone = pandaZone.previousElementSibling.id;
+
+      // Types of Nodes
+      let elementNodeType = lionZone.nodeType;
+      let textNodeType = lionZone.firstChild.nodeType;
+
+      // JavaScript and the DOM: Changing content and style
+      lionZone.style.backgroundColor = "#fff3cd";
+      elephantZone.style.backgroundColor = "#d1ecf1";
+      pandaZone.style.backgroundColor = "#f8d7da";
+
+      lionZone.querySelector("h2").innerHTML = "Updated Lion Zone";
+      elephantZone.querySelector("h2").innerHTML = "Updated Elephant Zone";
+      pandaZone.querySelector("h2").innerHTML = "Updated Panda Zone";
+
+      output.innerHTML =
+        "<strong>DOM Tree Information:</strong><br>" +
+        "Parent of Lion Zone: " + parentNodeName + "<br>" +
+        "First child of Zoo: " + firstChildZone + "<br>" +
+        "Second child of Zoo: " + secondChildZone + "<br><br>" +
+
+        "<strong>Sibling Node Information:</strong><br>" +
+        "Next sibling of Lion Zone: " + nextSiblingZone + "<br>" +
+        "Previous sibling of Panda Zone: " + previousSiblingZone + "<br><br>" +
+
+        "<strong>Types of Nodes:</strong><br>" +
+        "Lion Zone element node type: " + elementNodeType + "<br>" +
+        "Lion Zone first child text node type: " + textNodeType + "<br><br>" +
+
+        "<strong>DOM Update:</strong><br>" +
+        "The animal zone headings and background colours were updated using JavaScript.";
+    }
+  </script>
+
+</body>
+</html>
